@@ -97,7 +97,14 @@ public class HabitsActivity extends AppCompatActivity {
             public void onItemRangeInserted(int positionStart, int itemCount) {
                 super.onItemRangeInserted(positionStart, itemCount);
 
-                binding.recyclerView.scrollToPosition(0);
+                binding.recyclerView.scrollToPosition(positionStart);
+            }
+
+            @Override
+            public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
+                super.onItemRangeMoved(fromPosition, toPosition, itemCount);
+
+                binding.recyclerView.scrollToPosition(toPosition);
             }
         });
         return adapter;

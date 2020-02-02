@@ -1,39 +1,90 @@
 package com.flovett.habit.edithabit;
 
+import android.app.Application;
 import android.text.TextUtils;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+import androidx.databinding.ObservableBoolean;
+import androidx.databinding.ObservableField;
+import androidx.lifecycle.AndroidViewModel;
 
 import com.flovett.habit.App;
 import com.flovett.habit.SingleLiveEvent;
 import com.flovett.habit.data.Habit;
+import com.flovett.habit.data.HabitPriority;
 import com.flovett.habit.data.database.HabitDao;
 
 import java.util.concurrent.Executors;
 
-public class HabitViewModel extends ViewModel {
+public class HabitViewModel extends AndroidViewModel {
 
-    private Habit habit = new Habit("", "", 3);
+    private static final int DEFAULT_PRIORITY = HabitPriority.MEDIUM.getIntValue();
+    private static final int MAX_PRIORITY = HabitPriority.values().length - 1;
+
+    private Habit habit = new Habit("", "", DEFAULT_PRIORITY);
+
+    private boolean isNewHabit = true;
+    private ObservableField<String> priorityTitle = new ObservableField<>();
+    private ObservableBoolean titleError = new ObservableBoolean(false);
+
     private SingleLiveEvent<Void> habitUpdatedEvent = new SingleLiveEvent<>();
-    private MutableLiveData<Boolean> titleError = new MutableLiveData<>(Boolean.FALSE);
+
+    public HabitViewModel(Application app) {
+        super(app);
+    }
 
     public SingleLiveEvent<Void> getHabitUpdatedEvent() {
         return habitUpdatedEvent;
     }
 
-    public Habit getHabit() {
-        return habit;
+    public void setHabit(Habit habit) {
+        this.habit = new Habit(habit);
+        isNewHabit = false;
     }
 
-    public void setHabit(Habit habit) {
-        this.habit = habit;
+    public void setTitle(String title) {
+        habit.setTitle(title);
+    }
+
+    public void setDescription(String description) {
+        habit.setDescription(description);
+    }
+
+    public void setPriority(int priority) {
+        habit.setPriority(priority);
+        updatePriorityTitle(priority);
+    }
+
+    public ObservableField<String> getPriorityTitle() {
+        return priorityTitle;
+    }
+
+    public int getMaxPriority() {
+        return MAX_PRIORITY;
+    }
+
+    public boolean isNewHabit() {
+        return isNewHabit;
+    }
+
+    public String getTitle() {
+        return habit.getTitle();
+    }
+
+    public String getDescription() {
+        return habit.getDescription();
+    }
+
+    public int getPriority() {
+        return habit.getPriority();
+    }
+
+    public ObservableBoolean getTitleError() {
+        return titleError;
     }
 
     public void onSave() {
         if (TextUtils.isEmpty(habit.getTitle())) {
-            titleError.setValue(Boolean.TRUE);
+            titleError.set(true);
             return;
         }
 
@@ -53,7 +104,12 @@ public class HabitViewModel extends ViewModel {
         habitUpdatedEvent.call();
     }
 
-    public LiveData<Boolean> getTitleError() {
-        return titleError;
+    private void updatePriorityTitle(int priority) {
+        String title = getPriorityTitle(priority);
+        priorityTitle.set(title);
+    }
+
+    private String getPriorityTitle(int priority) {
+        return getApplication().getString(HabitPriority.fromInt(priority).getName());
     }
 }

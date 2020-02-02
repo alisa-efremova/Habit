@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.flovett.habit.R;
 import com.flovett.habit.data.Habit;
+import com.flovett.habit.data.HabitPriority;
 import com.flovett.habit.databinding.ItemHabitBinding;
 
 public class HabitsAdapter extends PagedListAdapter<Habit, HabitsAdapter.HabitViewHolder> {
@@ -43,6 +44,7 @@ public class HabitsAdapter extends PagedListAdapter<Habit, HabitsAdapter.HabitVi
         }
 
         public void bind(Habit habit) {
+            binding.setBackgroundColor(HabitPriority.fromInt(habit.getPriority()).getColor());
             binding.setHabit(habit);
             binding.executePendingBindings();
         }

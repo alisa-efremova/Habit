@@ -33,7 +33,7 @@ public interface HabitDao {
     @Query("SELECT * FROM habits")
     LiveData<List<Habit>> getAll();
 
-    @Query("SELECT * FROM habits ORDER BY id DESC")
+    @Query("SELECT * FROM habits ORDER BY priority DESC, id DESC")
     DataSource.Factory<Integer, Habit> getDataSourceForAll();
 
     @Query("SELECT * FROM habits WHERE id = :id")

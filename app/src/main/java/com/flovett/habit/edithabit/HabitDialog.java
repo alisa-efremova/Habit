@@ -32,7 +32,7 @@ public class HabitDialog extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         model = ViewModelProviders.of(this).get(HabitViewModel.class);
         if (habit != null) {
-            model.setHabit(new Habit(habit));
+            model.setHabit(habit);
         }
 
         LayoutDialogEditHabitBinding dialogBinding = DataBindingUtil.inflate(
