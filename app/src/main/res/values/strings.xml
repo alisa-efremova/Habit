@@ -1,3 +1,22 @@
 <resources>
-    <string name="app_name">Habit</string>
+    <string name="app_name">Привычки</string>
+    <string name="activity_title_habits">ПРИВЫЧКИ</string>
+    <string name="habits_helper">Список привычек, которые вы бы хотели приобрести</string>
+    <string name="button_add_new_habit">Добавить привычку</string>
+    <string name="button_remove_all_habits">Удалить все</string>
+    <string name="empty_habits_list_helper">Пока не создано ни одной привычки, чего же ты ждешь!</string>
+    <string name="dialog_new_habit_title">Новая привычка</string>
+    <string name="dialog_edit_habit_title">Редактирование привычки</string>
+    <string name="error_empty_title">Заполните название</string>
+    <string name="habit_title_hint">Название</string>
+    <string name="habit_description_hint">Описание</string>
+    <string name="habit_priority_hint">Приоритет - </string>
+    <string name="priority_low">Низкий</string>
+    <string name="priority_medium">Средний</string>
+    <string name="priority_high">Высокий</string>
+    <string name="priority_vital">Очень высокий</string>
+    <string name="button_save">Сохранить</string>
+    <string name="button_cancel">Отмена</string>
+    <string name="button_delete">Удалить</string>
+    <string name="button_edit">Править</string>
 </resources>

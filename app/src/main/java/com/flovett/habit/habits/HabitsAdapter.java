@@ -14,7 +14,9 @@ import com.flovett.habit.data.Habit;
 import com.flovett.habit.data.HabitPriority;
 import com.flovett.habit.databinding.ItemHabitBinding;
 
-public class HabitsAdapter extends PagedListAdapter<Habit, HabitsAdapter.HabitViewHolder> {
+import java.util.List;
+
+public class HabitsAdapter extends PagedListAdapter<Habit, RecyclerView.ViewHolder> {
 
     public HabitsAdapter(DiffUtil.ItemCallback<Habit> diffUtilCallback) {
         super(diffUtilCallback);
@@ -22,7 +24,7 @@ public class HabitsAdapter extends PagedListAdapter<Habit, HabitsAdapter.HabitVi
 
     @NonNull
     @Override
-    public HabitViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         ItemHabitBinding binding = DataBindingUtil.inflate(inflater, R.layout.item_habit, parent, false);
 
@@ -30,8 +32,14 @@ public class HabitsAdapter extends PagedListAdapter<Habit, HabitsAdapter.HabitVi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HabitViewHolder holder, int position) {
-        holder.bind(getItem(position));
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        HabitViewHolder habitViewHolder = (HabitViewHolder) holder;
+        habitViewHolder.bind(getItem(position));
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
     }
 
     public class HabitViewHolder extends RecyclerView.ViewHolder {
