@@ -7,8 +7,12 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import com.flovett.habit.R;
+import com.flovett.habit.daily_report.DailyReportActivity;
 import com.flovett.habit.databinding.ActivityHomeBinding;
 import com.flovett.habit.habits.HabitsActivity;
+
+import org.joda.time.LocalDate;
+
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -24,6 +28,12 @@ public class HomeActivity extends AppCompatActivity {
 
         viewModel.getOpenHabitListEvent().observe(this, (Void v) -> {
             Intent intent = new Intent(this, HabitsActivity.class);
+            startActivity(intent);
+        });
+
+        viewModel.getFillDailyReportEvent().observe(this, (LocalDate date) -> {
+            Intent intent = new Intent(this, DailyReportActivity.class);
+            intent.putExtra(DailyReportActivity.EXTRA_DATE, viewModel.getDate());
             startActivity(intent);
         });
 

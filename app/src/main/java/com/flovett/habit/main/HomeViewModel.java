@@ -4,28 +4,26 @@ import androidx.databinding.ObservableField;
 import androidx.lifecycle.ViewModel;
 
 import com.flovett.habit.SingleLiveEvent;
+import com.flovett.habit.Util.DateUtil;
 
 import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 public class HomeViewModel extends ViewModel {
 
     private static LocalDate DEFAULT_DATE = LocalDate.now();
-    private static DateTimeFormatter weekDayFormatter = DateTimeFormat.forPattern("E");
-    private static DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("d MMMM YYYY");
 
     private LocalDate date = DEFAULT_DATE;
     private ObservableField<String> formattedDate = new ObservableField<>(formatDate(DEFAULT_DATE));
 
     private SingleLiveEvent<Void> openHabitListEvent = new SingleLiveEvent<>();
-
-    public SingleLiveEvent<Void> getOpenHabitListEvent() {
-        return openHabitListEvent;
-    }
+    private SingleLiveEvent<LocalDate> fillDailyReportEvent = new SingleLiveEvent<>();
 
     public void onOpenHabitList() {
         openHabitListEvent.call();
+    }
+
+    public LocalDate getDate() {
+        return date;
     }
 
     public ObservableField<String> getFormattedDate() {
@@ -42,7 +40,19 @@ public class HomeViewModel extends ViewModel {
         formattedDate.set(formatDate(date));
     }
 
+    public void onFillDailyReport() {
+        fillDailyReportEvent.setValue(date);
+    }
+
+    public SingleLiveEvent<Void> getOpenHabitListEvent() {
+        return openHabitListEvent;
+    }
+
+    public SingleLiveEvent<LocalDate> getFillDailyReportEvent() {
+        return fillDailyReportEvent;
+    }
+
     private String formatDate(LocalDate date) {
-        return weekDayFormatter.print(date).toUpperCase() + ", " + dateFormatter.print(date);
+        return DateUtil.formatDate(date);
     }
 }
