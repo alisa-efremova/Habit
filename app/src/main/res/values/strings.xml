@@ -20,4 +20,6 @@
     <string name="button_delete">Удалить</string>
     <string name="button_edit">Править</string>
     <string name="button_habits_list">Список привычек</string>
+    <string name="button_day_back">&lt; День назад</string>
+    <string name="button_day_forward">День вперед &gt;</string>
 </resources>

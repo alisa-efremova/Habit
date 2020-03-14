@@ -33,6 +33,6 @@ public class HomeActivity extends AppCompatActivity {
     private void bind() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         binding.setLifecycleOwner(this);
-        binding.setModel(viewModel);
+        binding.setViewModel(viewModel);
     }
 }
