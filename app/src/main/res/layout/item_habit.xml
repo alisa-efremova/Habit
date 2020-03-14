@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="com.flovett.habit.data.Habit" />
+        <import type="com.flovett.habit.R" />
+        <variable
+            name="habit"
+            type="com.flovett.habit.data.Habit" />
+        <variable
+            name="backgroundColor"
+            type="int" />
+    </data>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@{context.getColor(backgroundColor)}"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:text='@{habit.title}' />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            android:text="@{habit.description}" />
+    </LinearLayout>
+</layout>
+
