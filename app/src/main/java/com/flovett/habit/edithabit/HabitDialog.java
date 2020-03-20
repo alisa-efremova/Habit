@@ -12,7 +12,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.flovett.habit.R;
-import com.flovett.habit.data.Habit;
+import com.flovett.habit.data.entity.Habit;
 import com.flovett.habit.databinding.LayoutDialogEditHabitBinding;
 
 public class HabitDialog extends DialogFragment {

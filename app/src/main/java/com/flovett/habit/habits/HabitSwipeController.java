@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.flovett.habit.R;
-import com.flovett.habit.data.Habit;
+import com.flovett.habit.data.entity.Habit;
 
 public class HabitSwipeController extends ItemTouchHelper.Callback {
 

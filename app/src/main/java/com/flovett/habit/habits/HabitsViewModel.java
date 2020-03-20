@@ -8,8 +8,8 @@ import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
 import com.flovett.habit.App;
-import com.flovett.habit.data.Habit;
 import com.flovett.habit.data.database.HabitDao;
+import com.flovett.habit.data.entity.Habit;
 
 import java.util.concurrent.Executors;
 

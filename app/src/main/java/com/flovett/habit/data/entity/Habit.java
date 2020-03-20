@@ -1,6 +1,7 @@
-package com.flovett.habit.data;
+package com.flovett.habit.data.entity;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -9,7 +10,8 @@ import java.util.Objects;
 @Entity(tableName = "habits")
 public class Habit {
     @PrimaryKey(autoGenerate = true)
-    private long id;
+    @ColumnInfo(name = "habit_id")
+    private long habitId;
     private String title;
     private String description;
     private int priority;
@@ -22,15 +24,15 @@ public class Habit {
 
     public Habit(Habit habit) {
         this(habit.title, habit.description, habit.priority);
-        id = habit.id;
+        habitId = habit.habitId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setHabitId(long habitId) {
+        this.habitId = habitId;
     }
 
-    public long getId() {
-        return id;
+    public long getHabitId() {
+        return habitId;
     }
 
     public String getTitle() {
@@ -62,7 +64,7 @@ public class Habit {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Habit habit = (Habit) o;
-        return id == habit.id &&
+        return habitId == habit.habitId &&
                 priority == habit.priority &&
                 title.equals(habit.title) &&
                 Objects.equals(description, habit.description);
@@ -70,12 +72,12 @@ public class Habit {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, priority);
+        return Objects.hash(habitId, title, description, priority);
     }
 
     @NonNull
     @Override
     public String toString() {
-        return id + ":" + title;
+        return habitId + ":" + title;
     }
 }

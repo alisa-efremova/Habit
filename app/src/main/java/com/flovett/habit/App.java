@@ -7,8 +7,8 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.flovett.habit.data.Habit;
 import com.flovett.habit.data.database.AppDatabase;
+import com.flovett.habit.data.entity.Habit;
 
 import java.util.Arrays;
 import java.util.List;

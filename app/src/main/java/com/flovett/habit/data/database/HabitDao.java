@@ -8,37 +8,39 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.flovett.habit.data.Habit;
+import com.flovett.habit.data.entity.Habit;
 
 import java.util.List;
 
 
 @Dao
-public interface HabitDao {
-    @Insert
-    void insert(Habit habit);
+public abstract class HabitDao {
 
     @Insert
-    void insertList(List<Habit> habits);
+    public abstract void insert(Habit habit);
+
+    @Insert
+    public abstract long[] insertList(List<Habit> habits);
 
     @Update
-    void update(Habit habit);
+    public abstract void update(Habit habit);
 
     @Delete
-    void delete(Habit habit);
+    public abstract void delete(Habit habit);
 
     @Query("DELETE FROM habits")
-    void deleteAll();
+    public abstract void deleteAll();
 
     @Query("SELECT * FROM habits")
-    LiveData<List<Habit>> getAll();
+    public abstract LiveData<List<Habit>> getAll();
 
-    @Query("SELECT * FROM habits ORDER BY priority DESC, id DESC")
-    DataSource.Factory<Integer, Habit> getDataSourceForAll();
+    @Query("SELECT * FROM habits ORDER BY priority DESC, habit_id DESC")
+    public abstract DataSource.Factory<Integer, Habit> getDataSourceForAll();
 
-    @Query("SELECT * FROM habits WHERE id = :id")
-    LiveData<Habit> getById(long id);
+    @Query("SELECT * FROM habits WHERE habit_id = :id")
+    public abstract LiveData<Habit> getById(long id);
 
     @Query("SELECT * FROM habits WHERE title = :title")
-    LiveData<Habit> getByTitle(String title);
+    public abstract LiveData<Habit> getByTitle(String title);
+
 }

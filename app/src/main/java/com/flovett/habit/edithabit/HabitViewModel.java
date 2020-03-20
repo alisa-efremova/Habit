@@ -9,9 +9,9 @@ import androidx.lifecycle.AndroidViewModel;
 
 import com.flovett.habit.App;
 import com.flovett.habit.SingleLiveEvent;
-import com.flovett.habit.data.Habit;
 import com.flovett.habit.data.HabitPriority;
 import com.flovett.habit.data.database.HabitDao;
+import com.flovett.habit.data.entity.Habit;
 
 import java.util.concurrent.Executors;
 
@@ -90,7 +90,7 @@ public class HabitViewModel extends AndroidViewModel {
 
         HabitDao habitDao = App.getInstance().getDb().habitDao();
         Executors.newSingleThreadScheduledExecutor().execute(() -> {
-            if (habit.getId() == 0) {
+            if (habit.getHabitId() == 0) {
                 habitDao.insert(habit);
             } else {
                 habitDao.update(habit);

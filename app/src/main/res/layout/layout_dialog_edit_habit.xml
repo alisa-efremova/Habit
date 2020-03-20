@@ -5,7 +5,7 @@
 
     <data>
         <import type="com.flovett.habit.edithabit.HabitViewModel" />
-        <import type="com.flovett.habit.data.Habit" />
+        <import type="com.flovett.habit.data.entity.Habit" />
         <variable
             name="model"
             type="HabitViewModel" />

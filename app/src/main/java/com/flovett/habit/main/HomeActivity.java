@@ -1,11 +1,12 @@
 package com.flovett.habit.main;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.content.Intent;
-import android.os.Bundle;
 import com.flovett.habit.R;
 import com.flovett.habit.daily_report.DailyReportActivity;
 import com.flovett.habit.databinding.ActivityHomeBinding;
@@ -38,6 +39,11 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         bind();
+
+
+//        Executors.newSingleThreadScheduledExecutor().execute(() -> {
+//            App.getInstance().getDb().prepopulate();
+//        });
     }
 
     private void bind() {

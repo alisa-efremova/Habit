@@ -2,11 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <import type="com.flovett.habit.data.Habit" />
+        <import type="com.flovett.habit.data.entity.Habit" />
         <import type="com.flovett.habit.R" />
         <variable
             name="habit"
-            type="com.flovett.habit.data.Habit" />
+            type="com.flovett.habit.data.entity.Habit" />
         <variable
             name="backgroundColor"
             type="int" />

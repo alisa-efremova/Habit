@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.flovett.habit.R;
-import com.flovett.habit.data.Habit;
+import com.flovett.habit.data.entity.Habit;
 import com.flovett.habit.databinding.ActivityHabitsBinding;
 import com.flovett.habit.edithabit.HabitDialog;
 
@@ -82,7 +82,7 @@ public class HabitsActivity extends AppCompatActivity {
         DiffUtil.ItemCallback<Habit> diffUtilCallback = new DiffUtil.ItemCallback<Habit>() {
             @Override
             public boolean areItemsTheSame(@NonNull Habit oldItem, @NonNull Habit newItem) {
-                return oldItem.getId() == newItem.getId();
+                return oldItem.getHabitId() == newItem.getHabitId();
             }
 
             @Override
