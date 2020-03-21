@@ -6,8 +6,6 @@ import com.flovett.habit.data.entity.Estimation;
 import com.flovett.habit.data.entity.Habit;
 
 public class EstimationWithHabit {
-    public static final int MAX_ESTIMATION_VALUE = 5;
-
     @Embedded
     private Estimation estimation;
 
@@ -33,10 +31,6 @@ public class EstimationWithHabit {
 
     public void setEstimation(Estimation estimation) {
         this.estimation = estimation;
-    }
-
-    public int getMaxEstimationValue() {
-        return MAX_ESTIMATION_VALUE;
     }
 
 }

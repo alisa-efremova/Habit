@@ -52,7 +52,8 @@ public class DailyReportAdapter extends RecyclerView.Adapter<DailyReportAdapter.
         }
 
         void bind(EstimationWithHabit estimation) {
-            binding.setEstimation(estimation);
+            EstimationViewModel viewModel = new EstimationViewModel(estimation);
+            binding.setModel(viewModel);
             binding.executePendingBindings();
         }
     }

@@ -4,17 +4,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <import type="com.flovett.habit.data.query.EstimationWithHabit" />
         <import type="com.flovett.habit.data.entity.Habit" />
-        <import type="com.flovett.habit.data.entity.Estimation" />
+        <import type="com.flovett.habit.daily_report.EstimationViewModel" />
+
         <variable
-            name="estimation"
-            type="com.flovett.habit.data.query.EstimationWithHabit" />
+            name="model"
+            type="EstimationViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="50dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp">
 
@@ -22,20 +23,31 @@
             android:id="@+id/titleTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:text='@{estimation.habit.title}'
+            android:layout_marginEnd="3dp"
+            android:text='@{model.habit.title}'
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/emojiTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/emojiTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:text="@{model.emoji}"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/seekBar"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <SeekBar
             android:id="@+id/seekBar"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:max="@{estimation.maxEstimationValue}"
-            android:progress="@={estimation.estimation.value}"
+            android:max="@{model.maxEstimationValue}"
+            android:progress="@={model.estimationValue}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
