@@ -31,14 +31,19 @@ public abstract class HabitDao {
     @Query("DELETE FROM habits")
     public abstract void deleteAll();
 
-    @Query("SELECT * FROM habits")
-    public abstract LiveData<List<Habit>> getAll();
+    private static final String QUERY_GET_ALL_SORTED = "SELECT * " +
+            "FROM habits " +
+            "ORDER BY priority DESC, habit_id DESC";
 
-    @Query("SELECT * FROM habits ORDER BY priority DESC, habit_id DESC")
+    @Query(QUERY_GET_ALL_SORTED)
     public abstract DataSource.Factory<Integer, Habit> getDataSourceForAll();
+
+    @Query(QUERY_GET_ALL_SORTED)
+    public abstract List<Habit> getAll();
 
     @Query("SELECT * FROM habits WHERE habit_id = :id")
     public abstract LiveData<Habit> getById(long id);
+
 
     @Query("SELECT * FROM habits WHERE title = :title")
     public abstract LiveData<Habit> getByTitle(String title);

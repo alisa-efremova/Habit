@@ -37,7 +37,11 @@ public abstract class EstimationDao {
     @Query("SELECT * FROM estimations")
     public abstract LiveData<List<Estimation>> getAll();
 
-    @Query("SELECT * FROM estimations, habits where estimations.parent_habit_id = habits.habit_id AND date = :date")
-    public abstract LiveData<List<EstimationWithHabit>> getEstims(LocalDate date);
+    @Query("SELECT * FROM estimations, habits WHERE estimations.parent_habit_id = habits.habit_id AND date = :date")
+    public abstract List<EstimationWithHabit> getEstims(LocalDate date);
+
+    @Query("SELECT * FROM estimations, habits WHERE estimations.parent_habit_id = habits.habit_id AND date = :date")
+    public abstract LiveData<List<EstimationWithHabit>> getEstimsLiveData(LocalDate date);
+
 }
 

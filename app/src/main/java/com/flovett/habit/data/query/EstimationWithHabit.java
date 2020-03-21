@@ -14,6 +14,11 @@ public class EstimationWithHabit {
     @Embedded
     private Habit habit;
 
+    public EstimationWithHabit(Estimation estimation, Habit habit) {
+        this.estimation = estimation;
+        this.habit = habit;
+    }
+
     public Habit getHabit() {
         return habit;
     }
