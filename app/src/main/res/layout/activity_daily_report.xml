@@ -19,41 +19,55 @@
 
         <TextView
             android:id="@+id/dateTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
+            android:layout_marginEnd="5dp"
             android:text="@{viewModel.formattedDate}"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/dayForwardButton"
+            app:layout_constraintEnd_toStartOf="@+id/dayBackButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <ImageView
             android:id="@+id/dayBackButton"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
-            android:text="@string/button_day_back"
+            android:layout_width="50dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/colorAccent"
+            android:gravity="center_horizontal|top"
             android:onClick="@{() -> viewModel.onDayBack()}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dateTextView" />
+            android:padding="3dp"
+            android:src="@drawable/ic_previous"
+            android:tint="@color/colorSoftBackground"
+            app:onTouchListener="@{viewModel.onDayBackButtonTouchListener}"
+            app:layout_constraintBottom_toBottomOf="@+id/dayForwardButton"
+            app:layout_constraintEnd_toStartOf="@+id/dayForwardButton"
+            app:layout_constraintTop_toTopOf="@+id/dayForwardButton" />
 
-        <Button
+        <ImageView
             android:id="@+id/dayForwardButton"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:background="@color/colorAccent"
+            android:gravity="center_horizontal|top"
             android:onClick="@{() -> viewModel.onDayForward()}"
-            android:text="@string/button_day_forward"
+            android:padding="3dp"
+            android:src="@drawable/ic_next"
+            android:tint="@color/colorSoftBackground"
+            app:onTouchListener="@{viewModel.onDayForwardButtonTouchListener}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/dayBackButton" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/estimRecyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dayBackButton" />
+            app:layout_constraintTop_toBottomOf="@+id/dateTextView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
