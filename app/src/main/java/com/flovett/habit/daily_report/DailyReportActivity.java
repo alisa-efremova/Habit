@@ -43,6 +43,12 @@ public class DailyReportActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        viewModel.saveEstimations();
+    }
+
     private void bind() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_daily_report);
         binding.setLifecycleOwner(this);

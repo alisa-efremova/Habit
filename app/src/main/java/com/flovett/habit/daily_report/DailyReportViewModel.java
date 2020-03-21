@@ -12,6 +12,7 @@ import com.flovett.habit.data.query.EstimationWithHabit;
 import org.joda.time.LocalDate;
 
 import java.util.List;
+import java.util.concurrent.Executors;
 
 public class DailyReportViewModel extends ViewModel {
 
@@ -39,5 +40,14 @@ public class DailyReportViewModel extends ViewModel {
 
     public ObservableField<String> getFormattedDate() {
         return formattedDate;
+    }
+
+    public void saveEstimations() {
+        List<EstimationWithHabit> estimations = estimationsLiveData.getValue();
+        if (estimations != null && !estimations.isEmpty()) {
+            Executors.newSingleThreadScheduledExecutor().execute(() -> {
+                estimationDao.update(estimations);
+            });
+        }
     }
 }

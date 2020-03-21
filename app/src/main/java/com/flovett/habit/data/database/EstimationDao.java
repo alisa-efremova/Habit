@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
+import androidx.room.Update;
 
 import com.flovett.habit.data.entity.Estimation;
 import com.flovett.habit.data.query.EstimationWithHabit;
@@ -14,18 +16,28 @@ import java.util.List;
 
 
 @Dao
-public interface EstimationDao {
+public abstract class EstimationDao {
 
     @Insert
-    void insert(Estimation estimation);
+    public abstract void insert(Estimation estimation);
+
+    @Transaction
+    public void update(List<EstimationWithHabit> estimationsWithHabit) {
+        for (EstimationWithHabit estimationWithHabit : estimationsWithHabit) {
+            update(estimationWithHabit.getEstimation());
+        }
+    }
+
+    @Update
+    public abstract void update(Estimation estimation);
 
     @Insert
-    void insertList(List<Estimation> estimations);
+    public abstract void insertList(List<Estimation> estimations);
 
     @Query("SELECT * FROM estimations")
-    LiveData<List<Estimation>> getAll();
+    public abstract LiveData<List<Estimation>> getAll();
 
     @Query("SELECT * FROM estimations, habits where estimations.parent_habit_id = habits.habit_id AND date = :date")
-    LiveData<List<EstimationWithHabit>> getEstims(LocalDate date);
+    public abstract LiveData<List<EstimationWithHabit>> getEstims(LocalDate date);
 }
 

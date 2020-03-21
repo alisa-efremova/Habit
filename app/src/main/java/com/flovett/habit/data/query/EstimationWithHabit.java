@@ -6,13 +6,13 @@ import com.flovett.habit.data.entity.Estimation;
 import com.flovett.habit.data.entity.Habit;
 
 public class EstimationWithHabit {
-    @Embedded Estimation estimation;
+    public static final int MAX_ESTIMATION_VALUE = 5;
+
+    @Embedded
+    private Estimation estimation;
 
     @Embedded
     private Habit habit;
-
-//    @Relation(parentColumn = "habit_id", entityColumn = "habit_id")
-//    private List<Estimation> estimations;
 
     public Habit getHabit() {
         return habit;
@@ -30,11 +30,8 @@ public class EstimationWithHabit {
         this.estimation = estimation;
     }
 
-    //    public List<Estimation> getEstimations() {
-//        return estimations;
-//    }
-//
-//    public void setEstimations(List<Estimation> estimations) {
-//        this.estimations = estimations;
-//    }
+    public int getMaxEstimationValue() {
+        return MAX_ESTIMATION_VALUE;
+    }
+
 }

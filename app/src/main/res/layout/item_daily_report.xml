@@ -14,30 +14,31 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp">
-
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
 
         <TextView
             android:id="@+id/titleTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text='@{estimation.habit.title + "\n(" + estimation.estimation.formattedDate + ")"}'
+            android:layout_marginEnd="16dp"
+            android:text='@{estimation.habit.title}'
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/seekBar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/valueTextView"
-            android:layout_width="0dp"
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:text="@{Integer.toString(estimation.estimation.value)}"
-            android:textAlignment="textEnd"
-            android:textSize="20sp"
+            android:max="@{estimation.maxEstimationValue}"
+            android:progress="@={estimation.estimation.value}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/titleTextView"
             app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
