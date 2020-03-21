@@ -8,14 +8,11 @@ import androidx.lifecycle.ViewModel;
 import com.flovett.habit.App;
 import com.flovett.habit.Util.DateUtil;
 import com.flovett.habit.data.database.EstimationDao;
-import com.flovett.habit.data.database.HabitDao;
 import com.flovett.habit.data.entity.Estimation;
-import com.flovett.habit.data.entity.Habit;
 import com.flovett.habit.data.query.EstimationWithHabit;
 
 import org.joda.time.LocalDate;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
@@ -24,7 +21,6 @@ public class DailyReportViewModel extends ViewModel {
     private static LocalDate DEFAULT_DATE = LocalDate.now();
 
     private EstimationDao estimationDao;
-    private HabitDao habitDao;
     private LocalDate date = DEFAULT_DATE;
     private MutableLiveData<List<EstimationWithHabit>> estimationsLiveData = new MutableLiveData<>();
 
@@ -32,21 +28,17 @@ public class DailyReportViewModel extends ViewModel {
 
     public DailyReportViewModel() {
         estimationDao = App.getInstance().getDb().estimationDao();
-        habitDao = App.getInstance().getDb().habitDao();
     }
 
     private void loadEstimations(LocalDate date) {
         Executors.newSingleThreadScheduledExecutor().execute(() -> {
-            List<EstimationWithHabit> estims = estimationDao.getEstims(date);
-            if (estims.isEmpty()) {
-                List<Habit> habits = habitDao.getAll();
-                List<Estimation> newEstimations = new ArrayList<>();
-                for (Habit habit : habits) {
-                    Estimation estimation = new Estimation(date, 0, habit);
-                    newEstimations.add(estimation);
-                    estims.add(new EstimationWithHabit(estimation, habit));
+            List<EstimationWithHabit> estims = estimationDao.getHabitsWithEstim(date);
+            for (EstimationWithHabit estimationWithHabit : estims) {
+                if (estimationWithHabit.getEstimation() == null) {
+                    Estimation estimation = new Estimation(date, 0, estimationWithHabit.getHabit());
+                    estimationWithHabit.setEstimation(estimation);
+                    estimationDao.insert(estimation);
                 }
-                estimationDao.insertList(newEstimations);
             }
 
             estimationsLiveData.postValue(estims);

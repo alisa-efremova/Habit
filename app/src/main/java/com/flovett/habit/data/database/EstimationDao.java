@@ -34,14 +34,10 @@ public abstract class EstimationDao {
     @Insert
     public abstract void insertList(List<Estimation> estimations);
 
-    @Query("SELECT * FROM estimations")
-    public abstract LiveData<List<Estimation>> getAll();
-
-    @Query("SELECT * FROM estimations, habits WHERE estimations.parent_habit_id = habits.habit_id AND date = :date")
-    public abstract List<EstimationWithHabit> getEstims(LocalDate date);
-
-    @Query("SELECT * FROM estimations, habits WHERE estimations.parent_habit_id = habits.habit_id AND date = :date")
-    public abstract LiveData<List<EstimationWithHabit>> getEstimsLiveData(LocalDate date);
+    @Query("SELECT * " +
+            "FROM habits " +
+            "LEFT JOIN estimations ON habit_id = parent_habit_id AND date = :date " +
+            "ORDER BY priority DESC, habit_id DESC")
+    public abstract List<EstimationWithHabit> getHabitsWithEstim(LocalDate date);
 
 }
-
