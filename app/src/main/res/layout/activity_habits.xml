@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.flovett.habit.habits.HabitsActivity.EventHandlers" />
+        <import type="com.flovett.habit.habits.HabitsActivity.EventHandler" />
         <import type="com.flovett.habit.habits.HabitsViewModel"/>
         <import type="android.view.View" />
         <variable
             name="handler"
-            type="EventHandlers" />
+            type="com.flovett.habit.habits.HabitsActivity.EventHandler" />
         <variable
             name="model"
             type="com.flovett.habit.habits.HabitsViewModel" />
@@ -44,6 +44,8 @@
             android:layout_marginEnd="8dp"
             android:background="@color/colorSoftBackground"
             android:visibility="@{!model.hasNoHabits ? View.VISIBLE : View.INVISIBLE}"
+            android:paddingBottom="100dp"
+            android:clipToPadding="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

@@ -5,8 +5,8 @@
     <string name="button_add_new_habit">Добавить привычку</string>
     <string name="button_remove_all_habits">Удалить все</string>
     <string name="empty_habits_list_helper">Пока не создано ни одной привычки, чего же ты ждешь!</string>
-    <string name="dialog_new_habit_title">Новая привычка</string>
-    <string name="dialog_edit_habit_title">Редактирование привычки</string>
+    <string name="new_habit_title">Новая привычка</string>
+    <string name="edit_habit_title">Редактирование привычки</string>
     <string name="error_empty_title">Заполните название</string>
     <string name="habit_title_hint">Название</string>
     <string name="habit_description_hint">Описание</string>

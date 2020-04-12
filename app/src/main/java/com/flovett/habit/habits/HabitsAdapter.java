@@ -16,8 +16,14 @@ import com.flovett.habit.databinding.ItemHabitBinding;
 
 public class HabitsAdapter extends PagedListAdapter<Habit, RecyclerView.ViewHolder> {
 
+    private EventHandler eventHandler;
+
     public HabitsAdapter(DiffUtil.ItemCallback<Habit> diffUtilCallback) {
         super(diffUtilCallback);
+    }
+
+    public void setEventHandler(EventHandler eventHandler) {
+        this.eventHandler = eventHandler;
     }
 
     @NonNull
@@ -52,11 +58,16 @@ public class HabitsAdapter extends PagedListAdapter<Habit, RecyclerView.ViewHold
         public void bind(Habit habit) {
             binding.setBackgroundColor(HabitPriority.fromInt(habit.getPriority()).getColor());
             binding.setHabit(habit);
+            binding.setEventHandler(eventHandler);
             binding.executePendingBindings();
         }
 
         public Habit getHabit() {
             return binding.getHabit();
         }
+    }
+
+    public interface EventHandler {
+        void onHabitSelected(Habit habit);
     }
 }

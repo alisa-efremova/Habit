@@ -33,6 +33,11 @@ public class HabitsActivity extends AppCompatActivity {
 
         model = ViewModelProviders.of(this).get(HabitsViewModel.class);
         habitsAdapter = createHabitsAdapter();
+        habitsAdapter.setEventHandler((Habit habit) -> {
+            Intent intent = new Intent(HabitsActivity.this, HabitActivity.class);
+            intent.putExtra(HabitActivity.EXTRA_HABIT, habit);
+            startActivity(intent);
+        });
 
         model.getHabitsLiveData().observe(this,
                 (PagedList<Habit> habits) -> habitsAdapter.submitList(habits)
@@ -44,7 +49,7 @@ public class HabitsActivity extends AppCompatActivity {
     private void bind() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_habits);
         binding.setLifecycleOwner(this);
-        binding.setHandler(new EventHandlers());
+        binding.setHandler(new EventHandler());
         binding.setModel(model);
 
         binding.recyclerView.setAdapter(habitsAdapter);
@@ -113,7 +118,7 @@ public class HabitsActivity extends AppCompatActivity {
         return adapter;
     }
 
-    public class EventHandlers {
+    public class EventHandler {
         public void onAddNewHabit() {
             Intent intent = new Intent(HabitsActivity.this, HabitActivity.class);
             startActivity(intent);

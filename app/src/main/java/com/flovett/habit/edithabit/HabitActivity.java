@@ -32,6 +32,9 @@ public class HabitActivity extends AppCompatActivity {
 
         bind();
 
+        int title = habit != null ? R.string.edit_habit_title : R.string.new_habit_title;
+        setTitle(title);
+
         model.getHabitUpdatedEvent().observe(this, (Void v) -> {
             finish();
         });

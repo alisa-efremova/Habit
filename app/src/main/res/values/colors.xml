@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#848482</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorSoftBackground">#F7F5F5</color>
+    <color name="colorOnClickBackground">#F7D07A</color>
     <color name="colorOtherButton">#009688</color>
     <color name="colorPriorityLow">#BAFA90</color>
     <color name="colorPriorityMedium">#FFF387</color>
