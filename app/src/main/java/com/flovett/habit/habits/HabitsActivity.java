@@ -1,5 +1,6 @@
 package com.flovett.habit.habits;
 
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
 
@@ -16,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.flovett.habit.R;
 import com.flovett.habit.data.entity.Habit;
 import com.flovett.habit.databinding.ActivityHabitsBinding;
-import com.flovett.habit.edithabit.HabitDialog;
+import com.flovett.habit.edithabit.HabitActivity;
 
 
 public class HabitsActivity extends AppCompatActivity {
@@ -63,7 +64,9 @@ public class HabitsActivity extends AppCompatActivity {
 
             @Override
             public void onEdit(Habit habit) {
-                new HabitDialog(habit).show(getSupportFragmentManager(), null);
+                Intent intent = new Intent(HabitsActivity.this, HabitActivity.class);
+                intent.putExtra(HabitActivity.EXTRA_HABIT, habit);
+                startActivity(intent);
             }
         });
 
@@ -112,7 +115,8 @@ public class HabitsActivity extends AppCompatActivity {
 
     public class EventHandlers {
         public void onAddNewHabit() {
-            new HabitDialog().show(getSupportFragmentManager(), null);
+            Intent intent = new Intent(HabitsActivity.this, HabitActivity.class);
+            startActivity(intent);
         }
 
         public void onDeleteAll() {

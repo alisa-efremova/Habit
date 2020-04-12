@@ -7,10 +7,11 @@ import androidx.room.PrimaryKey;
 
 import com.flovett.habit.data.enums.ScheduleType;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity(tableName = "habits")
-public class Habit {
+public class Habit implements Serializable {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "habit_id")
     private long habitId;

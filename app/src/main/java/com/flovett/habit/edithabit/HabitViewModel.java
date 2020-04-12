@@ -124,10 +124,6 @@ public class HabitViewModel extends AndroidViewModel {
         habitUpdatedEvent.call();
     }
 
-    public void onCancel() {
-        habitUpdatedEvent.call();
-    }
-
     private void updatePriorityTitle(int priority) {
         String title = getPriorityTitle(priority);
         priorityTitle.set(title);

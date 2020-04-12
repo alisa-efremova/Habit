@@ -39,11 +39,6 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         bind();
-
-
-//        Executors.newSingleThreadScheduledExecutor().execute(() -> {
-//            App.getInstance().getDb().prepopulate();
-//        });
     }
 
     private void bind() {
