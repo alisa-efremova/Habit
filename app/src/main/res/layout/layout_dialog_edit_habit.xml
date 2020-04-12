@@ -109,18 +109,13 @@
                 android:layout_marginBottom="4dp"
                 android:text="@string/schedule_type_title"/>
             <RadioButton
-                android:id="@+id/radioScheduleTypeUndefined"
-                android:text="@string/schedule_type_undefined"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <RadioButton
                 android:id="@+id/radioScheduleTypeMorning"
                 android:text="@string/schedule_type_morning"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <RadioButton
-                android:id="@+id/radioScheduleTypeLunch"
-                android:text="@string/schedule_type_lunch"
+                android:id="@+id/radioScheduleTypeDay"
+                android:text="@string/schedule_type_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <RadioButton

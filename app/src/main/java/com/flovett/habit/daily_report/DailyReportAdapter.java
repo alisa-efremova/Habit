@@ -8,45 +8,66 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.flovett.habit.R;
+import com.flovett.habit.data.enums.ScheduleType;
 import com.flovett.habit.data.query.EstimationWithHabit;
-import com.flovett.habit.databinding.ItemDailyReportBinding;
+import com.flovett.habit.databinding.ItemDailyReportEstimBinding;
+import com.flovett.habit.databinding.ItemDailyReportHeaderBinding;
 
 import java.util.List;
 
-public class DailyReportAdapter extends RecyclerView.Adapter<DailyReportAdapter.Holder> {
+public class DailyReportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<EstimationWithHabit> estimationList;
+    private List<DailyReportListItem> items;
 
-    public DailyReportAdapter(List<EstimationWithHabit> estimationList) {
-        this.estimationList = estimationList;
+    public DailyReportAdapter(List<DailyReportListItem> estimationList) {
+        this.items = estimationList;
     }
 
-    public void setEstimationList(List<EstimationWithHabit> estimationList) {
-        this.estimationList = estimationList;
+    public void setEstimationList(List<DailyReportListItem> estimationList) {
+        this.items = estimationList;
     }
 
     @NonNull
     @Override
-    public DailyReportAdapter.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        ItemDailyReportBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.item_daily_report, parent, false);
-        return new Holder(binding);
+
+        if (viewType == DailyReportListItem.TYPE_HEADER) {
+            ItemDailyReportHeaderBinding binding = DataBindingUtil.inflate(
+                    layoutInflater, R.layout.item_daily_report_header, parent, false);
+            return new HeaderHolder(binding);
+        } else {
+            ItemDailyReportEstimBinding binding = DataBindingUtil.inflate(
+                    layoutInflater, R.layout.item_daily_report_estim, parent, false);
+            return new EstimHolder(binding);
+        }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DailyReportAdapter.Holder holder, int position) {
-        holder.bind(estimationList.get(position));
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if (getItemViewType(position) == DailyReportListItem.TYPE_HEADER) {
+            DailyReportHeaderListItem item = (DailyReportHeaderListItem) items.get(position);
+            ((HeaderHolder) holder).bind(item.getScheduleType());
+        } else {
+            DailyReportEstimListItem item = (DailyReportEstimListItem) items.get(position);
+            ((EstimHolder) holder).bind(item.getEstimationWithHabit());
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return items.get(position).getType();
     }
 
     @Override
     public int getItemCount() {
-        return estimationList.size();
+        return items.size();
     }
 
-    class Holder extends RecyclerView.ViewHolder {
-        ItemDailyReportBinding binding;
+    class EstimHolder extends RecyclerView.ViewHolder {
+        ItemDailyReportEstimBinding binding;
 
-        Holder(ItemDailyReportBinding binding) {
+        EstimHolder(ItemDailyReportEstimBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
@@ -54,6 +75,20 @@ public class DailyReportAdapter extends RecyclerView.Adapter<DailyReportAdapter.
         void bind(EstimationWithHabit estimation) {
             EstimationViewModel viewModel = new EstimationViewModel(estimation);
             binding.setModel(viewModel);
+            binding.executePendingBindings();
+        }
+    }
+
+    class HeaderHolder extends RecyclerView.ViewHolder {
+        ItemDailyReportHeaderBinding binding;
+
+        HeaderHolder(ItemDailyReportHeaderBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+
+        void bind(ScheduleType scheduleType) {
+            binding.setScheduleType(scheduleType);
             binding.executePendingBindings();
         }
     }

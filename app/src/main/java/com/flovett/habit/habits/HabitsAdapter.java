@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.flovett.habit.R;
-import com.flovett.habit.data.HabitPriority;
+import com.flovett.habit.data.enums.HabitPriority;
 import com.flovett.habit.data.entity.Habit;
 import com.flovett.habit.databinding.ItemHabitBinding;
 

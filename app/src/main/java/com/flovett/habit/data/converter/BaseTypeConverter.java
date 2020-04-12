@@ -3,7 +3,7 @@ package com.flovett.habit.data.converter;
 
 import androidx.room.TypeConverter;
 
-import com.flovett.habit.data.ScheduleType;
+import com.flovett.habit.data.enums.ScheduleType;
 
 import org.joda.time.LocalDate;
 

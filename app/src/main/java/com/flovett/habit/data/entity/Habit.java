@@ -5,7 +5,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.flovett.habit.data.ScheduleType;
+import com.flovett.habit.data.enums.ScheduleType;
 
 import java.util.Objects;
 
@@ -22,7 +22,7 @@ public class Habit {
     private int priority;
 
     @ColumnInfo(name = "schedule_type")
-    private ScheduleType scheduleType = ScheduleType.UNDEFINED;
+    private ScheduleType scheduleType = ScheduleType.DAY;
 
     public Habit(String title, String description, int priority) {
         this.title = title;

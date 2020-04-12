@@ -8,13 +8,16 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.flovett.habit.R;
+import com.flovett.habit.data.enums.ScheduleType;
 import com.flovett.habit.data.query.EstimationWithHabit;
 import com.flovett.habit.databinding.ActivityDailyReportBinding;
 
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class DailyReportActivity extends AppCompatActivity {
@@ -38,7 +41,7 @@ public class DailyReportActivity extends AppCompatActivity {
         bind();
 
         viewModel.getEstimationsLiveData().observe(this, (List<EstimationWithHabit> estimations) -> {
-            adapter.setEstimationList(estimations);
+            adapter.setEstimationList(convertToGroupedList(estimations));
             adapter.notifyDataSetChanged();
         });
     }
@@ -56,5 +59,30 @@ public class DailyReportActivity extends AppCompatActivity {
 
         binding.estimRecyclerView.setAdapter(adapter);
         binding.estimRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private List<DailyReportListItem> convertToGroupedList(List<EstimationWithHabit> estimations) {
+        Map<ScheduleType, List<EstimationWithHabit>> groupingMap = new HashMap<>();
+
+        ArrayList<DailyReportListItem> listItems = new ArrayList<>();
+        for (EstimationWithHabit estimation : estimations) {
+            List<EstimationWithHabit> estimationsForType = groupingMap.get(estimation.getHabit().getScheduleType());
+            if (estimationsForType == null) {
+                estimationsForType = new ArrayList<>();
+            }
+            estimationsForType.add(estimation);
+            groupingMap.put(estimation.getHabit().getScheduleType(), estimationsForType);
+        }
+
+        for (ScheduleType scheduleType : ScheduleType.order()) {
+            if (groupingMap.containsKey(scheduleType)) {
+                listItems.add(new DailyReportHeaderListItem(scheduleType));
+                for (EstimationWithHabit estimation : groupingMap.get(scheduleType)) {
+                    listItems.add(new DailyReportEstimListItem(estimation));
+                }
+            }
+        }
+
+        return listItems;
     }
 }

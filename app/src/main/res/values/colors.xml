@@ -5,8 +5,8 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorSoftBackground">#F7F5F5</color>
     <color name="colorOtherButton">#009688</color>
-    <color name="colorPriorityLow">#C8FCA2</color>
-    <color name="colorPriorityMedium">#FEFAA8</color>
-    <color name="colorPriorityHigh">#FEDEA6</color>
-    <color name="colorPriorityVital">#F8B2AD</color>
+    <color name="colorPriorityLow">#BAFA90</color>
+    <color name="colorPriorityMedium">#FFF387</color>
+    <color name="colorPriorityHigh">#E8AA20</color>
+    <color name="colorPriorityVital">#CE342A</color>
 </resources>

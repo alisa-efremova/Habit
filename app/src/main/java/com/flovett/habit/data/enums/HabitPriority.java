@@ -1,4 +1,4 @@
-package com.flovett.habit.data;
+package com.flovett.habit.data.enums;
 
 import com.flovett.habit.R;
 

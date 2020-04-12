@@ -10,8 +10,8 @@ import androidx.lifecycle.AndroidViewModel;
 import com.flovett.habit.App;
 import com.flovett.habit.R;
 import com.flovett.habit.SingleLiveEvent;
-import com.flovett.habit.data.HabitPriority;
-import com.flovett.habit.data.ScheduleType;
+import com.flovett.habit.data.enums.HabitPriority;
+import com.flovett.habit.data.enums.ScheduleType;
 import com.flovett.habit.data.database.HabitDao;
 import com.flovett.habit.data.entity.Habit;
 
@@ -33,9 +33,8 @@ public class HabitViewModel extends AndroidViewModel {
     private SingleLiveEvent<Void> habitUpdatedEvent = new SingleLiveEvent<>();
 
     private HashMap<ScheduleType, Integer> scheduleTypeMap = new HashMap<ScheduleType, Integer>() {{
-        put(ScheduleType.UNDEFINED, R.id.radioScheduleTypeUndefined);
+        put(ScheduleType.DAY, R.id.radioScheduleTypeDay);
         put(ScheduleType.MORNING, R.id.radioScheduleTypeMorning);
-        put(ScheduleType.LUNCH, R.id.radioScheduleTypeLunch);
         put(ScheduleType.EVENING, R.id.radioScheduleTypeEvening);
     }} ;
 
@@ -98,7 +97,7 @@ public class HabitViewModel extends AndroidViewModel {
     }
 
     public void setScheduleTypeButtonId(int radioButtonId) {
-        ScheduleType type = ScheduleType.UNDEFINED;
+        ScheduleType type = ScheduleType.DAY;
         for (Map.Entry<ScheduleType, Integer> entry : scheduleTypeMap.entrySet()) {
             if (entry.getValue() == radioButtonId) {
                 type = entry.getKey();
