@@ -39,12 +39,6 @@ public class HabitsViewModel extends ViewModel {
         });
     }
 
-    public void deleteAllHabits() {
-        Executors.newSingleThreadScheduledExecutor().execute(() -> {
-            habitDao.deleteAll();
-        });
-    }
-
     private LiveData<PagedList<Habit>> createHabitsPagedListLiveData() {
         PagedList.Config config = new PagedList.Config.Builder()
                 .setPageSize(10)

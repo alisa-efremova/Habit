@@ -118,9 +118,5 @@ public class HabitsActivity extends AppCompatActivity {
             Intent intent = new Intent(HabitsActivity.this, HabitActivity.class);
             startActivity(intent);
         }
-
-        public void onDeleteAll() {
-            model.deleteAllHabits();
-        }
     }
 }
