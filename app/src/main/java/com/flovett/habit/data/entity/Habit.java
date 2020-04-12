@@ -5,6 +5,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.flovett.habit.data.ScheduleType;
+
 import java.util.Objects;
 
 @Entity(tableName = "habits")
@@ -12,9 +14,15 @@ public class Habit {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "habit_id")
     private long habitId;
+
     private String title;
+
     private String description;
+
     private int priority;
+
+    @ColumnInfo(name = "schedule_type")
+    private ScheduleType scheduleType;
 
     public Habit(String title, String description, int priority) {
         this.title = title;
@@ -59,6 +67,14 @@ public class Habit {
         this.priority = priority;
     }
 
+    public ScheduleType getScheduleType() {
+        return scheduleType;
+    }
+
+    public void setScheduleType(ScheduleType scheduleType) {
+        this.scheduleType = scheduleType;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -67,12 +83,13 @@ public class Habit {
         return habitId == habit.habitId &&
                 priority == habit.priority &&
                 title.equals(habit.title) &&
-                Objects.equals(description, habit.description);
+                Objects.equals(description, habit.description) &&
+                Objects.equals(scheduleType, habit.scheduleType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(habitId, title, description, priority);
+        return Objects.hash(habitId, title, description, priority, scheduleType);
     }
 
     @NonNull

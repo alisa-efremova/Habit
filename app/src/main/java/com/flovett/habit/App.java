@@ -43,6 +43,7 @@ public class App extends Application {
                         });
                     }
                 })
+                .addMigrations(AppDatabase.MIGRATION_1_2)
                 .build();
     }
 
