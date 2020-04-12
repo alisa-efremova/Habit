@@ -91,12 +91,51 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/priorityLabelTextView" />
 
+        <RadioGroup
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/scheduleTypeRadioGroup"
+            android:layout_marginTop="18dp"
+            android:layout_marginStart="4dp"
+            android:checkedButton="@={model.scheduleTypeButtonId}"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/prioritySeekBar">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginBottom="4dp"
+                android:text="@string/schedule_type_title"/>
+            <RadioButton
+                android:id="@+id/radioScheduleTypeUndefined"
+                android:text="@string/schedule_type_undefined"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/radioScheduleTypeMorning"
+                android:text="@string/schedule_type_morning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/radioScheduleTypeLunch"
+                android:text="@string/schedule_type_lunch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/radioScheduleTypeEvening"
+                android:text="@string/schedule_type_evening"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RadioGroup>
+
         <LinearLayout
             android:id="@+id/buttonsLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/prioritySeekBar"
+            app:layout_constraintTop_toBottomOf="@+id/scheduleTypeRadioGroup"
             android:layout_marginTop="32dp"
             android:paddingStart="0dp"
             android:paddingEnd="0dp"

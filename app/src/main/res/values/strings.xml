@@ -24,4 +24,9 @@
     <string name="button_day_forward">День вперед &gt;</string>
     <string name="button_fill_daily_report">Заполнить привычки за день</string>
     <string name="daily_report_title">Отчет за день</string>
+    <string name="schedule_type_title">Когда выполняем?</string>
+    <string name="schedule_type_undefined">В течение дня</string>
+    <string name="schedule_type_morning">Утро</string>
+    <string name="schedule_type_lunch">Обед</string>
+    <string name="schedule_type_evening">Вечер</string>
 </resources>

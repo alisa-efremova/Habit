@@ -22,7 +22,7 @@ public class Habit {
     private int priority;
 
     @ColumnInfo(name = "schedule_type")
-    private ScheduleType scheduleType;
+    private ScheduleType scheduleType = ScheduleType.UNDEFINED;
 
     public Habit(String title, String description, int priority) {
         this.title = title;
@@ -33,6 +33,7 @@ public class Habit {
     public Habit(Habit habit) {
         this(habit.title, habit.description, habit.priority);
         habitId = habit.habitId;
+        scheduleType = habit.scheduleType;
     }
 
     public void setHabitId(long habitId) {

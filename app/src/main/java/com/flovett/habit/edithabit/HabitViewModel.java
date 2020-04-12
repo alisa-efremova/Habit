@@ -8,11 +8,15 @@ import androidx.databinding.ObservableField;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.flovett.habit.App;
+import com.flovett.habit.R;
 import com.flovett.habit.SingleLiveEvent;
 import com.flovett.habit.data.HabitPriority;
+import com.flovett.habit.data.ScheduleType;
 import com.flovett.habit.data.database.HabitDao;
 import com.flovett.habit.data.entity.Habit;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.Executors;
 
 public class HabitViewModel extends AndroidViewModel {
@@ -27,6 +31,13 @@ public class HabitViewModel extends AndroidViewModel {
     private ObservableBoolean titleError = new ObservableBoolean(false);
 
     private SingleLiveEvent<Void> habitUpdatedEvent = new SingleLiveEvent<>();
+
+    private HashMap<ScheduleType, Integer> scheduleTypeMap = new HashMap<ScheduleType, Integer>() {{
+        put(ScheduleType.UNDEFINED, R.id.radioScheduleTypeUndefined);
+        put(ScheduleType.MORNING, R.id.radioScheduleTypeMorning);
+        put(ScheduleType.LUNCH, R.id.radioScheduleTypeLunch);
+        put(ScheduleType.EVENING, R.id.radioScheduleTypeEvening);
+    }} ;
 
     public HabitViewModel(Application app) {
         super(app);
@@ -80,6 +91,20 @@ public class HabitViewModel extends AndroidViewModel {
 
     public ObservableBoolean getTitleError() {
         return titleError;
+    }
+
+    public int getScheduleTypeButtonId() {
+        return scheduleTypeMap.get(habit.getScheduleType());
+    }
+
+    public void setScheduleTypeButtonId(int radioButtonId) {
+        ScheduleType type = ScheduleType.UNDEFINED;
+        for (Map.Entry<ScheduleType, Integer> entry : scheduleTypeMap.entrySet()) {
+            if (entry.getValue() == radioButtonId) {
+                type = entry.getKey();
+            }
+        }
+        habit.setScheduleType(type);
     }
 
     public void onSave() {
