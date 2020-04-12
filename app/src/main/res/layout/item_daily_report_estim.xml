@@ -26,6 +26,7 @@
             android:layout_marginEnd="3dp"
             android:text='@{model.habit.title}'
             android:textSize="16sp"
+            android:textColor="@{context.getColor(model.textColor)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/emojiTextView"
             app:layout_constraintStart_toStartOf="parent"

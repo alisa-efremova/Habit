@@ -2,6 +2,7 @@ package com.flovett.habit.daily_report;
 
 import androidx.databinding.ObservableField;
 
+import com.flovett.habit.R;
 import com.flovett.habit.data.entity.Estimation;
 import com.flovett.habit.data.entity.Habit;
 import com.flovett.habit.data.query.EstimationWithHabit;
@@ -11,10 +12,12 @@ public class EstimationViewModel {
 
     private EstimationWithHabit estimationWithHabit;
     private ObservableField<String> emoji = new ObservableField<>();
+    private ObservableField<Integer> textColor = new ObservableField<>();
 
 
     public EstimationViewModel(EstimationWithHabit estimationWithHabit) {
         this.estimationWithHabit = estimationWithHabit;
+        textColor.set(getTextColorInt(getEstimationValue()));
         emoji.set(getEmoji(getEstimationValue()));
     }
 
@@ -36,11 +39,22 @@ public class EstimationViewModel {
 
     public void setEstimationValue(int value) {
         getEstimation().setValue(value);
+        textColor.set(getTextColorInt(value));
         emoji.set(getEmoji(value));
+    }
+
+    public ObservableField<Integer> getTextColor() {
+        return textColor;
     }
 
     public ObservableField<String> getEmoji() {
         return emoji;
+    }
+
+    private int getTextColorInt(int estimationValue) {
+        return estimationValue == 0
+                ? R.color.colorLightDark
+                : R.color.colorPrimaryDark;
     }
 
     private String getEmoji(int estimationValue) {
