@@ -21,13 +21,12 @@ public class HabitSwipeController extends ItemTouchHelper.Callback {
     private static final float BUTTON_WIDTH = 170;
     private static final float BUTTON_PADDING = 16;
     private static final float CORNER_RADIUS = 16;
-    private static final float BUTTON_AREA_WIDTH = BUTTON_WIDTH * 2 + BUTTON_PADDING * 2;
+    private static final float BUTTON_AREA_WIDTH = BUTTON_WIDTH + BUTTON_PADDING;
 
     private boolean isSwipeBack;
     private boolean areButtonVisible;
     private RecyclerView.ViewHolder currentItemViewHolder;
     private RectF deleteButton;
-    private RectF editButton;
     private HabitSwipeController.Actions actions;
     private Context context;
 
@@ -108,13 +107,6 @@ public class HabitSwipeController extends ItemTouchHelper.Callback {
                 itemView.getRight(),
                 R.string.button_delete,
                 R.color.colorAccent);
-
-        editButton = drawButton(canvas,
-                itemView,
-                itemView.getRight() - BUTTON_WIDTH * 2 - BUTTON_PADDING,
-                itemView.getRight() - BUTTON_WIDTH - BUTTON_PADDING,
-                R.string.button_edit,
-                R.color.colorOtherButton);
     }
 
     private RectF drawButton(Canvas canvas, View view, float left, float right, int text, int color) {
@@ -199,8 +191,6 @@ public class HabitSwipeController extends ItemTouchHelper.Callback {
 
                     if (isAreaClicked(deleteButton, event)) {
                         actions.onDelete(habit);
-                    } else if (isAreaClicked(editButton, event)) {
-                        actions.onEdit(habit);
                     }
                 }
 
@@ -224,6 +214,5 @@ public class HabitSwipeController extends ItemTouchHelper.Callback {
 
     public static abstract class Actions {
         public void onDelete(Habit habit) {}
-        public void onEdit(Habit habit) {}
     }
 }

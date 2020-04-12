@@ -24,6 +24,8 @@ public class HabitsActivity extends AppCompatActivity {
     HabitsAdapter habitsAdapter;
     ActivityHabitsBinding binding;
     HabitsViewModel model;
+    DeleteBottomSheetDialogFragment deleteDialog;
+    EventHandler eventHandler = new EventHandler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +51,7 @@ public class HabitsActivity extends AppCompatActivity {
     private void bind() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_habits);
         binding.setLifecycleOwner(this);
-        binding.setHandler(new EventHandler());
+        binding.setHandler(eventHandler);
         binding.setModel(model);
 
         binding.recyclerView.setAdapter(habitsAdapter);
@@ -64,14 +66,7 @@ public class HabitsActivity extends AppCompatActivity {
         swipeController.setActions(new HabitSwipeController.Actions() {
             @Override
             public void onDelete(Habit habit) {
-                model.deleteHabit(habit);
-            }
-
-            @Override
-            public void onEdit(Habit habit) {
-                Intent intent = new Intent(HabitsActivity.this, HabitActivity.class);
-                intent.putExtra(HabitActivity.EXTRA_HABIT, habit);
-                startActivity(intent);
+                promptDeleteHabit(habit);
             }
         });
 
@@ -84,6 +79,11 @@ public class HabitsActivity extends AppCompatActivity {
                 swipeController.onDraw(c);
             }
         });
+    }
+
+    private void promptDeleteHabit(Habit habit) {
+        deleteDialog = new DeleteBottomSheetDialogFragment(habit, eventHandler);
+        deleteDialog.show(getSupportFragmentManager(), "");
     }
 
     private HabitsAdapter createHabitsAdapter() {
@@ -122,6 +122,19 @@ public class HabitsActivity extends AppCompatActivity {
         public void onAddNewHabit() {
             Intent intent = new Intent(HabitsActivity.this, HabitActivity.class);
             startActivity(intent);
+        }
+
+        public void onDeleteHabit(Habit habit) {
+            model.deleteHabit(habit);
+            if (deleteDialog != null) {
+                deleteDialog.dismiss();
+            }
+        }
+
+        public void onCancelDelete() {
+            if (deleteDialog != null) {
+                deleteDialog.dismiss();
+            }
         }
     }
 }

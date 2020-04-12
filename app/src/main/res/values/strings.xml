@@ -28,4 +28,5 @@
     <string name="schedule_type_day">В течение дня</string>
     <string name="schedule_type_morning">Утром</string>
     <string name="schedule_type_evening">Вечером</string>
+    <string name="delete_prompt">Вы уверены, что хотите удалить запись?</string>
 </resources>
