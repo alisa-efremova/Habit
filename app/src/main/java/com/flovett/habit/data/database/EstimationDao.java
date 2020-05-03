@@ -19,14 +19,7 @@ import java.util.List;
 public abstract class EstimationDao {
 
     @Insert
-    public abstract void insert(Estimation estimation);
-
-    @Transaction
-    public void update(List<EstimationWithHabit> estimationsWithHabit) {
-        for (EstimationWithHabit estimationWithHabit : estimationsWithHabit) {
-            update(estimationWithHabit.getEstimation());
-        }
-    }
+    public abstract long insert(Estimation estimation);
 
     @Update
     public abstract void update(Estimation estimation);
@@ -40,4 +33,25 @@ public abstract class EstimationDao {
             "ORDER BY priority DESC, habit_id DESC")
     public abstract List<EstimationWithHabit> getHabitsWithEstim(LocalDate date);
 
+    @Transaction
+    public void update(List<EstimationWithHabit> estimationsWithHabit) {
+        for (EstimationWithHabit estimationWithHabit : estimationsWithHabit) {
+            update(estimationWithHabit.getEstimation());
+        }
+    }
+
+    @Transaction
+    public List<EstimationWithHabit> loadHabitsWithEstim(LocalDate date) {
+        List<EstimationWithHabit> estims = getHabitsWithEstim(date);
+        for (EstimationWithHabit estimationWithHabit : estims) {
+            if (estimationWithHabit.getEstimation() == null) {
+                Estimation estimation = new Estimation(date, 0, estimationWithHabit.getHabit());
+                estimationWithHabit.setEstimation(estimation);
+                long id = insert(estimation);
+                estimation.setEstimationId(id);
+            }
+        }
+
+        return estims;
+    }
 }

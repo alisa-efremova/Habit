@@ -104,15 +104,7 @@ public class DailyReportViewModel extends ViewModel {
 
     private void loadEstimations(LocalDate date) {
         Executors.newSingleThreadScheduledExecutor().execute(() -> {
-            List<EstimationWithHabit> estims = estimationDao.getHabitsWithEstim(date);
-            for (EstimationWithHabit estimationWithHabit : estims) {
-                if (estimationWithHabit.getEstimation() == null) {
-                    Estimation estimation = new Estimation(date, 0, estimationWithHabit.getHabit());
-                    estimationWithHabit.setEstimation(estimation);
-                    estimationDao.insert(estimation);
-                }
-            }
-
+            List<EstimationWithHabit> estims = estimationDao.loadHabitsWithEstim(date);
             estimationsLiveData.postValue(estims);
         });
     }
