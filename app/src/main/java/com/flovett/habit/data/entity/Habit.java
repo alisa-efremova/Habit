@@ -5,6 +5,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.flovett.habit.data.enums.HabitState;
 import com.flovett.habit.data.enums.ScheduleType;
 
 import java.io.Serializable;
@@ -25,6 +26,8 @@ public class Habit implements Serializable {
     @ColumnInfo(name = "schedule_type")
     private ScheduleType scheduleType = ScheduleType.DAY;
 
+    private HabitState state = HabitState.ACTIVE;
+
     public Habit(String title, String description, int priority) {
         this.title = title;
         this.description = description;
@@ -35,6 +38,7 @@ public class Habit implements Serializable {
         this(habit.title, habit.description, habit.priority);
         habitId = habit.habitId;
         scheduleType = habit.scheduleType;
+        state = habit.state;
     }
 
     public void setHabitId(long habitId) {
@@ -77,6 +81,14 @@ public class Habit implements Serializable {
         this.scheduleType = scheduleType;
     }
 
+    public HabitState getState() {
+        return state;
+    }
+
+    public void setState(HabitState state) {
+        this.state = state;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -86,12 +98,13 @@ public class Habit implements Serializable {
                 priority == habit.priority &&
                 title.equals(habit.title) &&
                 Objects.equals(description, habit.description) &&
-                Objects.equals(scheduleType, habit.scheduleType);
+                Objects.equals(scheduleType, habit.scheduleType) &&
+                Objects.equals(state, habit.state);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(habitId, title, description, priority, scheduleType);
+        return Objects.hash(habitId, title, description, priority, scheduleType, state);
     }
 
     @NonNull

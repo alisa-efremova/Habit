@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Database(entities = {Habit.class, Estimation.class}, version = 2, exportSchema = false)
+@Database(entities = {Habit.class, Estimation.class}, version = 3, exportSchema = false)
 @TypeConverters({BaseTypeConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
     public abstract HabitDao habitDao();
@@ -50,6 +50,13 @@ public abstract class AppDatabase extends RoomDatabase {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE habits ADD COLUMN schedule_type INTEGER DEFAULT 0");
+        }
+    };
+
+    public static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE habits ADD COLUMN state INTEGER DEFAULT 0");
         }
     };
 }
